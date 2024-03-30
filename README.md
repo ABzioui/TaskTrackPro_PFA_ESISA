@@ -18,18 +18,15 @@ Lien_projet ou je peux voir le kanban,roadmap et taches """ https://github.com/u
 
 ## Fonctionnalités proposé
 
-- En tant qu'utilisateur, je veux pouvoir créer un nouveau projet.
-- En tant qu'utilisateur, je veux pouvoir m'inscrire avec mon adresse e-mail et un mot de passe sécurisé. 
-- En tant qu'utilisateur, je veux pouvoir exporter les données pour une analyse plus approfondie.
-- En tant qu'utilisateur, je veux pouvoir filtrer les données par date, projet et membre de l'équipe.
-- En tant qu'utilisateur, je veux pouvoir suivre le taux de progression des tâches.
-- En tant qu'utilisateur, je veux pouvoir visualiser la répartition des heures par projet et par membre de l'équipe. 
-- En tant qu'utilisateur, je veux pouvoir voir le nombre total d'heures travaillées par l'équipe.
-- En tant qu'utilisateur, je veux pouvoir enregistrer le temps consacré à une tâche.
-- En tant qu'utilisateur, je veux pouvoir ajouter des tâches à un projet existant.
-- En tant que utilisateur je peux me connecter.
-- En tant qu'utilisateur, je veux pouvoir me connecter avec mon adresse e-mail et mon mot de passe.
-
+1.	En tant qu'utilisateur, je veux pouvoir m'inscrire sur l'application.
+2.	En tant qu'utilisateur, je veux pouvoir me connecter à mon compte.
+3.	En tant qu'administrateur, je veux pouvoir gérer les utilisateurs (ajouter, supprimer, modifier des comptes).
+4.	En tant qu'utilisateur, je veux pouvoir saisir les détails d'un nouveau projet.
+5.	En tant qu'utilisateur, je veux pouvoir ajouter des tâches à un projet existant.
+6.	En tant qu'utilisateur, je veux pouvoir enregistrer le temps passé sur une tâche.
+7.	En tant qu'utilisateur, je veux pouvoir visualiser les KPI de charge de travail de l'équipe.- En tant qu'utilisateur, je veux pouvoir enregistrer le temps consacré à une tâche.
+8.	En tant qu'utilisateur, je veux pouvoir exporter les données pour une analyse plus approfondie.- En tant que utilisateur je peux me connecter.
+9.	En tant qu'utilisateur, je veux pouvoir filtrer les données par date, projet et membre de l'équipe.
 
 ## Technologies
 
@@ -52,11 +49,11 @@ npm install
 Puis pour lancer l'application coté back lancez la commande : 
 
 ```sh
-npm start
+npm run dev
 
 ```
 
-Par la suite passez sur le port 3000 sur le Browser.
+Par la suite passez sur le port 5001 sur le Browser.
 
 [ReactJS](https://reactjs.org/) est requis pour pouvoir exécuter cette application. C'est le front end de l'app. Pour installer tous les modules nécessaires au fonctionnement de notre jeu, exécutez la commande suivante :
 
@@ -78,6 +75,6 @@ Par la suite passez sur le port 3000 sur le Browser.
 
 ### Date de sortie du JEU
 
-TaskTrack Pro sera disponible le 1er Septembre 2024 , Tenez vous prêt !
+TaskTrack Pro sera disponible le 25 Mai 2024 , Tenez vous prêt !
 
 La version finale est prête , le lien de l'app : url-app-une-fois-quelle-sera-deployé
