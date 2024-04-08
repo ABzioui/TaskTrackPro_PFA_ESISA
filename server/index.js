@@ -8,6 +8,7 @@ import morgan from "morgan";
 import path from "path";
 import { error } from "console";
 import { register } from "./controllers/auth.js";
+import authRoutes from ".routes/auth.js";
 
 /* Configuration */
 
@@ -22,6 +23,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.post("/auth/register", register);
+
+app.use("auth", authRoutes);
 
 /* Mongoose */
 const PORT = process.env.PORT || 9000;
