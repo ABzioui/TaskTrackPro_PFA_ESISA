@@ -1,55 +1,39 @@
 import React from "react";
-import { Container, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import Form from "./Form";
 
 const SignIn = () => {
+  const theme = useTheme();
+  const isNonMobile = useMediaQuery("(min-width: 1000px)");
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{
-        marginTop: "8vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Typography component="h1" variant="h5">
-        Sign in
-      </Typography>
-      <form style={{ width: "100%", marginTop: "1rem" }} noValidate>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          style={{ margin: "2rem 0 1rem" }}
+    <Box>
+      <Box
+        width="100%"
+        backgroundColor={theme.palette.background.alt}
+        p="1rem 6%"
+        textAlign="center"
+      >
+        <Typography
+          fontWeight="bold"
+          fontSize="32px"
+          color={theme.palette.secondary.main}
         >
-          Sign In
-        </Button>
-      </form>
-    </Container>
+          TaskTrackPro
+        </Typography>
+      </Box>
+      <Box
+        width={isNonMobile ? "50%" : "93%"}
+        p="2rem"
+        m="2rem auto"
+        borderRadius="1.5rem"
+        backgroundColor={theme.palette.background.alt}
+      >
+        <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
+          Welcome to TaskTrackPro, the way to track your projects
+        </Typography>
+        <Form />
+      </Box>
+    </Box>
   );
 };
 

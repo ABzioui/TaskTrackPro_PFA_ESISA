@@ -19,10 +19,18 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
-            <Route element={<Layout />}>
+            {/*Route element={<Layout />}>
               <Route path="/" element={<Navigate to="/signin" />} />
               <Route path="/signin" element={<SignIn />} />
             </Route>
+            <Route element={<MainLayout />}>
+              <Route
+                path="/dashboard"
+                element={<Navigate to="/page" replace />}
+              />
+              <Route path="/page" element={<Dashboard />} />
+            </Route>*/}
+            <Route path="/" element={<SignIn />} />
             <Route element={<MainLayout />}>
               <Route
                 path="/dashboard"
