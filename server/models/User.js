@@ -29,14 +29,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    friends: {
-      type: Array,
-      default: [],
+    role: {
+      type: String,
+      enum: ["user", "manager", "superadmin"],
+      default: "manager",
     },
     location: String,
     occupation: String,
-    viewedProfile: Number,
-    impressions: Number,
+    phoneNumber: String,
   },
   { timestamps: true }
 );
