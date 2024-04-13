@@ -24,6 +24,7 @@ const registerSchema = yup.object().shape({
   location: yup.string().required("required"),
   occupation: yup.string().required("required"),
   picture: yup.string().required("required"),
+  phoneNumber: yup.string().required("required"),
 });
 
 const loginSchema = yup.object().shape({
@@ -39,6 +40,7 @@ const initialValuesRegister = {
   location: "",
   occupation: "",
   picture: "",
+  phoneNumber: "",
 };
 
 const initialValuesLogin = {
@@ -208,6 +210,18 @@ const Form = () => {
                     )}
                   </Dropzone>
                 </Box>
+                <TextField
+                  label="PhoneNumber"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.phoneNumber}
+                  name="phoneNumber"
+                  error={
+                    Boolean(touched.phoneNumber) && Boolean(errors.phoneNumber)
+                  }
+                  helperText={touched.phoneNumber && errors.phoneNumber}
+                  sx={{ gridColumn: "span 4" }}
+                />
               </>
             )}
 
