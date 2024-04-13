@@ -25,14 +25,18 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 5,
     },
-    country: String,
-    occupation: String,
-    phoneNumber: String,
-    role: {
+    picturePath: {
       type: String,
-      enum: ["administrateur", "manager", "employe"],
-      default: "admin",
+      default: "",
     },
+    friends: {
+      type: Array,
+      default: [],
+    },
+    location: String,
+    occupation: String,
+    viewedProfile: Number,
+    impressions: Number,
   },
   { timestamps: true }
 );
