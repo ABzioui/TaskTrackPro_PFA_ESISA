@@ -5,6 +5,7 @@ const initialState = {
   mode: "dark", // Initial state for the mode (can be "dark" or "light")
   user: null,
   token: null,
+  userId: "661b176f43074134fead3149",
 };
 
 // Creating a slice of state using createSlice function
