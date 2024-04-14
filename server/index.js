@@ -7,6 +7,9 @@ import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
+
+import generalRoutes from "./routes/general.js";
+
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
@@ -40,6 +43,9 @@ const upload = multer({ storage });
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
 app.use("/auth", authRoutes); // Fix the middleware path here
+
+/*ROUTES FOR SideBar and General*/
+app.use("/general", generalRoutes);
 
 /* Mongoose */
 const PORT = process.env.PORT || 9000;
