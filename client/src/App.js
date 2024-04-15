@@ -9,6 +9,7 @@ import Layout from "scenes/layout";
 import SignIn from "scenes/signin";
 import Dashboard from "scenes/dashboard";
 import MainLayout from "scenes/mainlayout";
+import Admin from "scenes/admin";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -37,6 +38,7 @@ function App() {
                 element={<Navigate to="/page" replace />}
               />
               <Route path="/page" element={<Dashboard />} />
+              <Route path="/admin" element={<Admin />} />
             </Route>
           </Routes>
         </ThemeProvider>
