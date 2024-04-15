@@ -8,7 +8,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 
+import controlRoutes from "./routes/control.js";
 import generalRoutes from "./routes/general.js";
+import managementRoutes from "./routes/management.js";
 
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
@@ -45,6 +47,8 @@ app.post("/auth/register", upload.single("picture"), register);
 app.use("/auth", authRoutes); // Fix the middleware path here
 
 /*ROUTES FOR SideBar and General*/
+app.use("/control", controlRoutes);
+app.use("/management", managementRoutes);
 app.use("/general", generalRoutes);
 
 /* Mongoose */

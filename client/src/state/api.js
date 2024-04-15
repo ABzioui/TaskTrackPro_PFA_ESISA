@@ -12,7 +12,11 @@ export const api = createApi({
         and ensure that it remains consistent and up-to-date with changes in the application state. 
         They play a crucial role in optimizing data fetching and caching in Redux-powered application */
     }),
+    getUsers: build.query({
+      query: () => "management/admin",
+      providesTags: ["Customers"],
+    }),
   }),
 });
 
-export const { useGetUserQuery } = api;
+export const { useGetUserQuery, useGetUsersQuery } = api;
