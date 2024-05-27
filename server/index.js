@@ -11,6 +11,7 @@ import path from "path";
 import controlRoutes from "./routes/control.js";
 import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
+import progressRoutes from "./routes/progress.js";
 
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
@@ -62,7 +63,7 @@ app.use("/auth", authRoutes); // Corrigez le chemin du middleware ici
 app.use("/control", controlRoutes);
 app.use("/management", managementRoutes);
 app.use("/general", generalRoutes); // "general" servira à obtenir les utilisateurs et le dashboard.
-
+app.use("/progress", progressRoutes);
 /* Mongoose */
 const PORT = process.env.PORT || 9000;
 mongoose
