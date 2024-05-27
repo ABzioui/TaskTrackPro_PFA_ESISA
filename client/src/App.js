@@ -11,6 +11,7 @@ import Dashboard from "scenes/dashboard";
 import MainLayout from "scenes/mainlayout";
 import Admin from "scenes/admin";
 import Geography from "scenes/geography";
+import Overview from "scenes/overview";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -41,6 +42,7 @@ function App() {
               <Route path="/page" element={<Dashboard />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/geography" element={<Geography />} />
+              <Route path="/overview" element={<Overview />} />
             </Route>
           </Routes>
         </ThemeProvider>
