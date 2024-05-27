@@ -60,6 +60,7 @@ const Form = () => {
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
     const formData = new FormData();
+    console.log(values["email"]);
     for (let value in values) {
       formData.append(value, values[value]);
     }
@@ -193,7 +194,7 @@ const Form = () => {
                     {({ getRootProps, getInputProps }) => (
                       <Box
                         {...getRootProps()}
-                        border={`2px dashed ${palette.primary.main}`}
+                        border={`2px dashed ${palette.primary.light}`}
                         p="1rem"
                         sx={{ "&:hover": { cursor: "pointer" } }}
                       >
@@ -256,9 +257,12 @@ const Form = () => {
               sx={{
                 m: "2rem 0",
                 p: "1rem",
-                backgroundColor: palette.primary.main,
+                backgroundColor: palette.secondary.main,
                 color: palette.background.alt,
-                "&:hover": { color: palette.primary.main },
+                "&:hover": {
+                  backgroundColor: palette.primary.light,
+                  color: palette.secondary.main,
+                },
               }}
             >
               {isLogin ? "LOGIN" : "REGISTER"}
@@ -270,7 +274,7 @@ const Form = () => {
               }}
               sx={{
                 textDecoration: "underline",
-                color: palette.primary.main,
+                color: palette.secondary.main,
                 "&:hover": {
                   cursor: "pointer",
                   color: palette.primary.light,

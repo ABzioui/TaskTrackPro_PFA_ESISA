@@ -100,13 +100,13 @@ const SideBar = ({
   setIsSidebarOpen,
   isNonMobile,
 }) => {
-  const { pathname } = useLocation(); // to get the path where we are currently at.
-  const [active, setActive] = useState(""); // this will determine at what page we are currently at
-  const navigate = useNavigate(); // so we can use Router.dom so we can navigate to other pages
+  const { pathname } = useLocation(); // pour obtenir le chemin où nous nous trouvons actuellement.
+  const [active, setActive] = useState(""); // Ceci déterminera à quelle page nous nous trouvons actuellement.
+  const navigate = useNavigate(); // Ainsi, nous pouvons utiliser Router.dom pour naviguer vers d'autres pages.
   const theme = useTheme();
 
   useEffect(() => {
-    setActive(pathname.substring(1)); // this will change the active to the current URL by us of the pathnname.
+    setActive(pathname.substring(1)); // Ceci changera l'élément actif pour l'URL actuelle en utilisant le chemin d'accès de l'URL
   }, [pathname]);
   return (
     <Box component="nav">

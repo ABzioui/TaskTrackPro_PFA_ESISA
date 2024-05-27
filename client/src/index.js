@@ -10,18 +10,20 @@ import { api } from "state/api";
 
 const store = configureStore({
   reducer: {
-    global: globalReducer,
-    [api.reducerPath]: api.reducer,
+    global: globalReducer, // Reducer global pour gérer l'état global de l'application
+    [api.reducerPath]: api.reducer, // Reducer pour gérer les appels API
   },
-  middleware: (getDefault) => getDefault().concat(api.middleware), // additional middleware for handling asynchronous API calls
+  middleware: (getDefault) => getDefault().concat(api.middleware), // Middleware pour gérer les appels API asynchrones
 });
-setupListeners(store.dispatch);
+setupListeners(store.dispatch); // Configuration des écouteurs Redux
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root")); // Création de l'élément racine React
 root.render(
+  // Rendu de l'application React
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      {/* Fourniture du store Redux à l'application */}
+      <App /> {/* Composant racine de l'application */}
     </Provider>
   </React.StrictMode>
 );

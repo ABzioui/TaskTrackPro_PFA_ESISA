@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001" }),
   reducerPath: "adminApi",
-  tagTypes: ["User", "Products", "Customers", "Transactions", "Geography"],
+  tagTypes: ["User", "Customers", "Geography"],
   endpoints: (build) => ({
     getUser: build.query({
       query: (id) => `general/user/${id}`,
@@ -12,11 +12,24 @@ export const api = createApi({
         and ensure that it remains consistent and up-to-date with changes in the application state. 
         They play a crucial role in optimizing data fetching and caching in Redux-powered application */
     }),
+    getUserByEmail: build.query({
+      query: (email) => `general/user/${email}`,
+      providesTags: ["User"],
+    }),
     getUsers: build.query({
       query: () => "management/admin",
       providesTags: ["Customers"],
     }),
+    getGeography: build.query({
+      query: () => "management/geography",
+      providesTags: ["Geography"],
+    }),
   }),
 });
 
-export const { useGetUserQuery, useGetUsersQuery } = api;
+export const {
+  useGetUserQuery,
+  useGetUsersQuery,
+  useGetGeographyQuery,
+  useGetUserByEmailQuery,
+} = api;
