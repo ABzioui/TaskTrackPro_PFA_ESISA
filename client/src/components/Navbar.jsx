@@ -120,9 +120,9 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
 
 export default Navbar;
 
-/*The Navbar component contains left and right side sections, each containing various icons and input fields.
-Icons such as menu, search, mode toggle, and settings are used from Material-UI's icon library.
-The useDispatch hook is used to dispatch actions to Redux store, and the setMode action is dispatched to toggle between light and dark modes.
-Material-UI components like AppBar, Toolbar, IconButton, and InputBase are used for styling and functionality.
-FlexBetween component is used for creating flexible layouts with items spaced between each other.
-Styles are applied using the sx prop from Material-UI's styling solution. */
+/*Le composant Navbar contient des sections gauche et droite, chacune contenant divers icônes et champs de saisie.
+Des icônes telles que le menu, la recherche, le basculement de mode et les paramètres sont utilisées à partir de la bibliothèque d'icônes de Material-UI.
+Le crochet useDispatch est utilisé pour envoyer des actions au magasin Redux, et l'action setMode est envoyée pour basculer entre les modes clair et sombre.
+Des composants Material-UI tels que AppBar, Toolbar, IconButton et InputBase sont utilisés pour le style et la fonctionnalité.
+Le composant FlexBetween est utilisé pour créer des mises en page flexibles avec des éléments espacés entre eux.
+Les styles sont appliqués à l'aide de la prop sx de la solution de style de Material-UI.*/

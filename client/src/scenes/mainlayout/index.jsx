@@ -9,7 +9,7 @@ import { useGetUserQuery } from "state/api";
 const MainLayout = () => {
   const isNonMobile = useMediaQuery("(min-width: 600px)"); // It returns a bool value if the screen is min than 600px
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const userId = useSelector((state) => state.global.userId); //This line will grap the userID from the ReduxToolkit not ReduxToolkit Query
+  const userId = useSelector((state) => state.global.userId); //Cette ligne récupérera l'ID de l'utilisateur à partir de ReduxToolkit, et non de ReduxToolkit Query.
   const { data } = useGetUserQuery(userId);
   console.log("data:", data);
 
@@ -28,7 +28,7 @@ const MainLayout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        {/* We added these two lines here to add the fonction to the button added on the NavBar */}
+        {/* Nous avons ajouté ces deux lignes ici pour ajouter la fonction au bouton ajouté sur la barre de navigation */}
         <Outlet />
       </Box>
     </Box>

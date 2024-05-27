@@ -1,8 +1,8 @@
 const { Box } = require("@mui/material");
 const { styled } = require("@mui/system");
 
-// styled is a way to re use css stylr in a componenets
-// material UI has this component Box that allow you to pass properties as if they're CSS properties.
+// "styled" est une façon de réutiliser les styles CSS dans un composant
+// Material UI a ce composant Box qui vous permet de passer des propriétés comme s'il s'agissait de propriétés CSS.
 const FlexBetween = styled(Box)({
   display: "flex",
   justifyContent: "space-between",

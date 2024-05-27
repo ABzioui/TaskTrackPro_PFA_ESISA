@@ -16,19 +16,31 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
 
+import { userData } from "./data/userData.js";
+import { projectData } from "./data/projectData.js";
+import { taskData } from "./data/taskData.js";
+import { workHoursData } from "./data/workHoursData.js";
+import { dataOverallStat } from "./data/dataOverallStat.js";
+
+import User from "./models/User.js";
+import Project from "./models/Project.js";
+import Task from "./models/Task.js";
+import WorkHour from "./models/WorkHour.js";
+import Overall from "./models/OverAll.js";
+
 /* Configuration */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config();
+dotenv.config(); // Ainsi, nous pouvons définir nos variables d'environnement
 const app = express();
-app.use(express.json());
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(morgan("common"));
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use(express.json()); // Middleware pour parser le JSON
+app.use(helmet()); // Middleware Helmet pour la sécurité
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); // Middleware Helmet pour la politique de ressource cross-origin
+app.use(morgan("common")); // Middleware Morgan pour les logs
+app.use(bodyParser.json({ limit: "30mb", extended: true })); // Middleware Body Parser pour le JSON
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true })); // Middleware Body Parser pour les données URL encodées
+app.use(cors()); // Middleware CORS pour les requêtes cross-origin
+app.use("/assets", express.static(path.join(__dirname, "public/assets"))); // Middleware pour servir les fichiers statiques dans le dossier 'public/assets'
 
 // Parse JSON bodies
 /* FILE STORAGE */
@@ -44,12 +56,12 @@ const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
-app.use("/auth", authRoutes); // Fix the middleware path here
+app.use("/auth", authRoutes); // Corrigez le chemin du middleware ici
 
-/*ROUTES FOR SideBar and General*/
+/*ROUTES pour la SideBar et le contenu general*/
 app.use("/control", controlRoutes);
 app.use("/management", managementRoutes);
-app.use("/general", generalRoutes);
+app.use("/general", generalRoutes); // "general" servira à obtenir les utilisateurs et le dashboard.
 
 /* Mongoose */
 const PORT = process.env.PORT || 9000;
@@ -60,5 +72,12 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+    /* Ici, nous devons ajouter les méthodes pour ajouter des données */
+
+    // User.insertMany(userData);
+    // Project.insertMany(projectData);
+    // Task.insertMany(taskData);
+    // WorkHour.insertMany(workHoursData);
+    // Overall.insertMany(dataOverallStat);
   })
   .catch((error) => console.log(`${error} did not connect`));

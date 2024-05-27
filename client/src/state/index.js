@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Defining initial state for the global slice of state
 const initialState = {
-  mode: "dark", // Initial state for the mode (can be "dark" or "light")
+  mode: "light", // Initial state for the mode (can be "dark" or "light")
   user: null,
   token: null,
   userId: "661b176f43074134fead3149",

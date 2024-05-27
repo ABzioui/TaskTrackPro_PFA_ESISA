@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
-
+// Ceci sera un schéma pour l'utilisateur qui représentera les données du modèle.
 const UserSchema = new mongoose.Schema(
   {
+    userID: {
+      type: Number,
+      default: 0,
+    },
     firstName: {
       type: String,
       required: true,
@@ -31,7 +35,7 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "manager", "superadmin"],
+      enum: ["employee", "manager", "admin"],
       default: "manager",
     },
     location: String,
@@ -43,3 +47,4 @@ const UserSchema = new mongoose.Schema(
 
 const User = mongoose.model("User", UserSchema);
 export default User;
+// Ceci est un schéma que nous passons à mongoose, et mongoDB utilisera ce modèle pour vérifier que chaque donnée réelle suit ce format.
