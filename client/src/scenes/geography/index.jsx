@@ -3,6 +3,7 @@ import { Box, useTheme } from "@mui/material";
 import { useGetGeographyQuery } from "state/api";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { geoData } from "state/geoData";
+import PageHeader from "components/PageHeader";
 
 const Geography = () => {
   const theme = useTheme();
@@ -10,6 +11,10 @@ const Geography = () => {
   console.log("data : ", data);
   return (
     <Box m="1.5rem 2.5rem">
+      <PageHeader
+        title="GEOGRAPHY"
+        subtitle="Find where your users are from."
+      />
       <Box
         mt="40px"
         height="75vh"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FormControl, MenuItem, InputLabel, Box, Select } from "@mui/material";
 import OverviewChart from "components/OverviewChart";
+import PageHeader from "components/PageHeader";
 
 const Overview = () => {
   const [view, setView] = useState("hours");
@@ -8,6 +9,10 @@ const Overview = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
+      <PageHeader
+        title="OVERVIEW"
+        subtitle="Overview of general hours and tasks"
+      />
       <Box height="75vh">
         <Box display="flex" justifyContent="flex-end">
           <Box>
