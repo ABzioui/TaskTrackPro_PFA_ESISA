@@ -5,7 +5,7 @@ const initialState = {
   mode: "light", // Initial state for the mode (can be "dark" or "light")
   user: null,
   token: null,
-  userId: "661b176f43074134fead3149",
+  userId: null,
 };
 
 // Creating a slice of state using createSlice function
@@ -21,10 +21,12 @@ export const globalSlice = createSlice({
     setLogin: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.userId = action.payload.user._id;
     },
     setLogout: (state) => {
       state.user = null;
       state.token = null;
+      state.userId = null;
     },
   },
 });
