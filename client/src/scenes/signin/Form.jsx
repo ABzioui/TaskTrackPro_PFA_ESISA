@@ -91,7 +91,6 @@ const Form = () => {
 
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
-    console.log("loggedIn.user._id :", loggedIn.user._id);
     if (loggedIn && loggedIn.token) {
       dispatch(
         setLogin({
