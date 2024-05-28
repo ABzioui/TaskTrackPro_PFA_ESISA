@@ -50,6 +50,7 @@ const initialValuesLogin = {
 
 const Form = () => {
   const [pageType, setPageType] = useState("login");
+  const [errorMessage, setErrorMessage] = useState("");
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -90,19 +91,23 @@ const Form = () => {
 
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
-    console.log(loggedIn.token);
-    if (loggedIn && loggedIn.token != null) {
+    console.log("loggedIn.user._id :", loggedIn.user._id);
+    if (loggedIn && loggedIn.token) {
       dispatch(
         setLogin({
           user: loggedIn.user,
           token: loggedIn.token,
+          userId: loggedIn.user._id,
         })
       );
       navigate("/dashboard");
+    } else {
+      setErrorMessage("Authentication error. Please check your credentials.");
     }
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
+    setErrorMessage(""); // Clear any previous error message
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
   };
@@ -212,7 +217,7 @@ const Form = () => {
                   </Dropzone>
                 </Box>
                 <TextField
-                  label="PhoneNumber"
+                  label="Phone Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.phoneNumber}
@@ -248,6 +253,16 @@ const Form = () => {
               sx={{ gridColumn: "span 4" }}
             />
           </Box>
+
+          {/* Error Message */}
+          {errorMessage && (
+            <Typography
+              color="error"
+              sx={{ mt: "1rem", mb: "1rem", textAlign: "center" }}
+            >
+              {errorMessage}
+            </Typography>
+          )}
 
           {/* BUTTONS */}
           <Box>
