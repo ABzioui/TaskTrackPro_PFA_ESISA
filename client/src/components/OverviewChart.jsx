@@ -1,23 +1,18 @@
 import React, { useMemo } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
-import { useGetOverviewQuery } from "state/api"; // Ensure this fetches the correct data structure
+import { useGetOverviewQuery } from "state/api";
 
 const OverviewChart = ({ isDashboard = false, view, year }) => {
   const theme = useTheme();
   const { data, isLoading } = useGetOverviewQuery();
-  console.log("Overall Data:", data);
-
-  let currentYear = 0;
 
   const [totalHoursLine, totalTasksLine] = useMemo(() => {
     if (!data) return [[], []];
 
     let yearData = null;
     for (let i = 0; i < data.length; i++) {
-      console.log("data array: ", data[i]);
       if (data[i].year == year) {
-        console.log("data[i]", data[i]);
         yearData = data[i];
         break;
       }
@@ -30,7 +25,6 @@ const OverviewChart = ({ isDashboard = false, view, year }) => {
     //   // Console log the current year
     //   console.log("Current Year:", currentYear);
     // });
-    console.log("yearData: ", yearData);
 
     if (!yearData) {
       console.log(`No data found for year: ${year}`);
