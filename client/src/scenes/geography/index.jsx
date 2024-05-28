@@ -9,6 +9,7 @@ const Geography = () => {
   const theme = useTheme();
   const { data } = useGetGeographyQuery();
   console.log("data : ", data);
+
   return (
     <Box m="1.5rem 2.5rem">
       <PageHeader
@@ -59,7 +60,18 @@ const Geography = () => {
             }}
             features={geoData.features}
             margin={{ top: 0, right: 0, bottom: 0, left: -50 }}
-            domain={[0, 30]}
+            domain={[0, 100]} // Adjust the domain to better reflect your data range
+            colors={[
+              "#d4edda",
+              "#a9dfbf",
+              "#7dcea0",
+              "#52be80",
+              "#27ae60",
+              "#e74c3c",
+              "#cb4335",
+              "#b03a2e",
+              "#943126",
+            ]}
             unknownColor="#666666"
             label="properties.name"
             valueFormat=".2s"

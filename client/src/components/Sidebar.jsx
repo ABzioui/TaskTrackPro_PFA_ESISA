@@ -29,6 +29,8 @@ import {
   TrendingUpOutlined,
   PieChartOutlined,
 } from "@mui/icons-material";
+import AutoGraphOutlinedIcon from "@mui/icons-material/AutoGraphOutlined";
+import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
@@ -45,7 +47,7 @@ const navItems = [
   },
   {
     text: "Projects",
-    icon: <ShoppingCartOutlined />,
+    icon: <TextSnippetOutlinedIcon />,
   },
   {
     text: "Tasks",
@@ -61,7 +63,7 @@ const navItems = [
   },
   {
     text: "Overview",
-    icon: <PointOfSaleOutlined />,
+    icon: <AutoGraphOutlinedIcon />,
   },
   {
     text: "Daily",

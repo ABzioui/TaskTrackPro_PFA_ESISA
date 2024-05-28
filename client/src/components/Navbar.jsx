@@ -9,7 +9,7 @@ import {
 } from "@mui/icons-material";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
-import { setMode } from "state";
+import { setMode, setLogout } from "state";
 import profileImage from "assets/profile.jpeg";
 import {
   AppBar,
@@ -23,14 +23,50 @@ import {
   Toolbar,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
+
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  const handleLogout = () => {
+    dispatch(setLogout());
+    navigate("/");
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchKeyPress = (event) => {
+    if (event.key === "Enter") {
+      navigateToRoute();
+    }
+  };
+
+  const navigateToRoute = () => {
+    const availableRoutes = [
+      "/overview",
+      "/admin",
+      "/daily",
+      "/dashboard",
+      "/geography",
+      "/monthly",
+    ]; // Example of available routes
+    const formattedInput = `/${searchInput}`;
+    if (availableRoutes.includes(formattedInput)) {
+      navigate(formattedInput);
+    } else {
+      alert("Route not found!");
+    }
+  };
 
   return (
     <AppBar sx={{ position: "static", background: "none", boxShadow: "none" }}>
@@ -46,8 +82,13 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             gap="3rem"
             p="0.1rem 1.5rem"
           >
-            <InputBase placeholder="Search..." />
-            <IconButton>
+            <InputBase
+              placeholder="Search..."
+              value={searchInput}
+              onChange={handleSearchChange}
+              onKeyPress={handleSearchKeyPress}
+            />
+            <IconButton onClick={navigateToRoute}>
               <Search />
             </IconButton>
           </FlexBetween>
@@ -58,7 +99,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlined sx={{ fontSize: "25px" }} />
             ) : (
-              <LightModeOutlined sx={{ fontSize: "25" }} />
+              <LightModeOutlined sx={{ fontSize: "25px" }} />
             )}
           </IconButton>
           <IconButton>
@@ -108,7 +149,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                 onClose={handleClose}
                 anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
               >
-                <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                <MenuItem onClick={handleLogout}>Log Out</MenuItem>
               </Menu>
             </Button>
           </FlexBetween>
