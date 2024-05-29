@@ -14,6 +14,7 @@ import Geography from "scenes/geography";
 import Overview from "scenes/overview";
 import Monthly from "scenes/monthly";
 import Daily from "scenes/daily";
+import Breakdown from "scenes/breakdown";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -47,6 +48,7 @@ function App() {
               <Route path="/overview" element={<Overview />} />
               <Route path="/monthly" element={<Monthly />} />
               <Route path="/daily" element={<Daily />} />
+              <Route path="/breakdown" element={<Breakdown />} />
             </Route>
           </Routes>
         </ThemeProvider>
