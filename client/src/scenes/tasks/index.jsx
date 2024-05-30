@@ -1,31 +1,24 @@
 import React from "react";
-import { useGetPerformanceQuery } from "state/api";
+import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { CircularProgress, Box, useTheme } from "@mui/material";
+import { useGetTasksQuery } from "state/api";
 import PageHeader from "components/PageHeader";
 
-const Performance = () => {
+const Tasks = () => {
   const theme = useTheme();
-  const { data: userWorkHours, error, isLoading } = useGetPerformanceQuery();
-  console.log("Data : ", userWorkHours);
-
+  const { data, isLoading } = useGetTasksQuery();
   const columns = [
-    { field: "userID", headerName: "User ID", width: 150 },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "firstName", headerName: "First Name", width: 150 },
-    { field: "lastName", headerName: "Last Name", width: 150 },
-    { field: "date", headerName: "Date", width: 150 },
-    { field: "hours", headerName: "Hours", width: 100 },
+    { field: "taskID", headerName: "TaskID", flex: 1 },
+    { field: "taskName", headerName: "Task Name", flex: 1 },
+    { field: "description", headerName: "Description", flex: 2 },
+    { field: "startDate", headerName: "Start Date", flex: 1 },
+    { field: "endDate", headerName: "End Date", flex: 1 },
   ];
-
-  if (isLoading) return <CircularProgress />;
-  if (error) return <div>Error: {error.message}</div>;
-
   return (
     <Box m="1.5rem 2.5rem">
       <PageHeader
-        title="POINTING DETAILS"
-        subtitle="List Of Users & Their Pointings History"
+        title="TASKS DETAILS"
+        subtitle="List Of Tasks & Their Details"
       />
       <Box
         mt="40px"
@@ -54,14 +47,14 @@ const Performance = () => {
         }}
       >
         <DataGrid
-          rows={userWorkHours}
+          loading={isLoading || !data}
+          getRowId={(row) => row._id}
+          rows={data || []}
           columns={columns}
-          pageSize={5}
-          getRowId={(row) => row._id} // Assuming workHoursID is unique
         />
       </Box>
     </Box>
   );
 };
 
-export default Performance;
+export default Tasks;
