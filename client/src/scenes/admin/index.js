@@ -4,6 +4,7 @@ import { useGetUsersQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
 import Dropzone from "react-dropzone";
 import { EditOutlined as EditOutlinedIcon } from "@mui/icons-material";
+import PageHeader from "components/PageHeader";
 
 const Admin = () => {
   const theme = useTheme();
@@ -112,6 +113,10 @@ const Admin = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
+      <PageHeader
+        title="USERS DETAILS"
+        subtitle="List Of Users & Their Details"
+      />
       {isFormVisible ? (
         <Box
           component="form"
