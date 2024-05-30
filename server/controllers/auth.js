@@ -71,3 +71,24 @@ export const login = async (req, res) => {
     res.status(500).json({ error: err.message }); // Retourne une erreur 500 en cas de problème lors de la connexion de l'utilisateur
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check if the user exists before attempting to delete
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Perform the deletion
+    await User.deleteOne({ _id: id });
+
+    // Send a success response
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    // Send an error response
+    res.status(500).json({ message: error.message });
+  }
+};

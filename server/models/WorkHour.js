@@ -6,7 +6,10 @@ const WorkHourSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    useID: Number,
+    userID: {
+      type: Number,
+      default: 0,
+    },
     date: Date,
     hours: Number,
     tasks: Array,
