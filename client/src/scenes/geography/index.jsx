@@ -60,10 +60,8 @@ const Geography = () => {
             }}
             features={geoData.features}
             margin={{ top: 0, right: 0, bottom: 0, left: -50 }}
-            domain={[0, 100]} // Adjust the domain to better reflect your data range
+            domain={[0, 30]} // Adjust the domain to better reflect your data range
             colors={[
-              "#d4edda",
-              "#a9dfbf",
               "#7dcea0",
               "#52be80",
               "#27ae60",
