@@ -18,6 +18,10 @@ export const register = async (req, res) => {
       phoneNumber,
     } = req.body;
 
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exists" });
+    }
     // Génération d'un sel et hachage du mot de passe
     const salt = await bcrypt.genSalt(); // Génère un sel pour le hachage
     const passwordHash = await bcrypt.hash(password, salt); // Hache le mot de passe avec le sel généré
@@ -86,9 +90,9 @@ export const deleteUser = async (req, res) => {
     await User.deleteOne({ _id: id });
 
     // Send a success response
-    res.status(200).json({ message: "User deleted successfully" });
-  } catch (error) {
+    res.status(200).json(user);
+  } catch (err) {
     // Send an error response
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: err.message });
   }
 };

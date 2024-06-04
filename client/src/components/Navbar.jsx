@@ -10,7 +10,7 @@ import {
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
 import { setMode, setLogout } from "state";
-import profileImage from "assets/profile.jpeg";
+import profileImage from "assets/CAPNoWord.png";
 import {
   AppBar,
   Button,
@@ -24,6 +24,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import CapImage from "assets/Cap-Enge--removebg-preview.png";
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
@@ -93,6 +94,14 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             </IconButton>
           </FlexBetween>
         </FlexBetween>
+        <img
+          src={CapImage}
+          alt="CAPImage"
+          style={{
+            width: "200px",
+            height: "auto",
+          }}
+        />
         {/* RIGHT SIDE */}
         <FlexBetween gap="1.5rem">
           <IconButton onClick={() => dispatch(setMode())}>

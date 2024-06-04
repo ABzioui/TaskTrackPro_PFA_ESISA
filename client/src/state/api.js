@@ -25,6 +25,10 @@ export const api = createApi({
       query: (email) => `general/user/${email}`,
       providesTags: ["User"],
     }),
+    deleteUserById: build.query({
+      query: (id) => `auth/deleteUser/${id}`,
+      providesTags: ["User"],
+    }),
     getUsers: build.query({
       query: () => "management/admin",
       providesTags: ["Customers"],
