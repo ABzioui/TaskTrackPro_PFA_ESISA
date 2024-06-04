@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
+import FlexBetween from "components/FlexBetween";
+import CAPImage from "../../assets/CAP-removebg-preview.png";
 
 const SignIn = () => {
   const theme = useTheme();
@@ -13,13 +15,23 @@ const SignIn = () => {
         p="1rem 6%"
         textAlign="center"
       >
-        <Typography
-          fontWeight="bold"
-          fontSize="32px"
-          color={theme.palette.secondary.main}
-        >
-          TaskTrackPro
-        </Typography>
+        <FlexBetween>
+          <Typography
+            fontWeight="bold"
+            fontSize="32px"
+            color={theme.palette.secondary.main}
+          >
+            TaskTrackPro
+          </Typography>
+          <img
+            src={CAPImage}
+            alt="CAPImage"
+            style={{
+              width: "165px",
+              height: "auto",
+            }}
+          />
+        </FlexBetween>
       </Box>
       <Box
         width={isNonMobile ? "50%" : "93%"}

@@ -67,18 +67,29 @@ const Form = () => {
     }
     formData.append("picturePath", values.picture.name);
 
-    const savedUserResponse = await fetch(
-      "http://localhost:5001/auth/register",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const savedUser = await savedUserResponse.json();
-    onSubmitProps.resetForm();
+    try {
+      const savedUserResponse = await fetch(
+        "http://localhost:5001/auth/register",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-    if (savedUser) {
-      setPageType("login");
+      const savedUser = await savedUserResponse.json();
+      if (savedUserResponse.status === 400) {
+        setErrorMessage(savedUser.error);
+        return;
+      }
+
+      onSubmitProps.resetForm();
+      if (savedUser) {
+        setPageType("login");
+      }
+    } catch (err) {
+      setErrorMessage(
+        "An error occurred during registration. Please try again."
+      );
     }
   };
 

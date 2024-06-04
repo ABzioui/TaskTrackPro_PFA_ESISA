@@ -18,3 +18,38 @@ export const getTasks = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const addProject = async (req, res) => {
+  try {
+    const {
+      projectID,
+      projectName,
+      description,
+      startDate,
+      endDate,
+      finished,
+    } = req.body;
+
+    console.log(
+      projectID,
+      projectName,
+      description,
+      startDate,
+      endDate,
+      finished
+    );
+
+    const newProject = new Project({
+      projectID,
+      projectName,
+      description,
+      startDate,
+      endDate,
+      finished,
+    });
+
+    const savedProject = await newProject.save();
+    res.status(201).json(savedProject);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

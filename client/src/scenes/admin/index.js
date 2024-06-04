@@ -66,7 +66,7 @@ const Admin = () => {
     console.log("Delete user with ID:", deleteUserId);
 
     const response = await fetch(
-      `http://localhost:5001/users/${deleteUserId}`,
+      `http://localhost:5001/auth/deleteUser/${deleteUserId}`,
       {
         method: "DELETE",
       }
