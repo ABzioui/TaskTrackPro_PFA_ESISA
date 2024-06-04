@@ -54,7 +54,7 @@ const navItems = [
     icon: <Groups2Outlined />,
   },
   {
-    text: "Task assignment",
+    text: "Taskassignment",
     icon: <ReceiptLongOutlined />,
   },
   {

@@ -33,8 +33,7 @@ const Projects = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
   const handleDeleteIDChange = (e) => {
@@ -42,12 +41,21 @@ const Projects = () => {
   };
 
   const handleSubmit = async () => {
-    console.log("New Project:", formValues);
-    // const formData = new FormData();
+    console.log("Form submitted:", formValues);
+    const formData = new FormData();
     // for (let value in formValues) {
     //   formData.append(value, formValues[value]);
     // }
-    // console.log("formData", formData);
+
+    // formData.append("projectID", formValues["projectID"]);
+    // console.log("formData_1 :", formData);
+    // formData.append("projectName", formValues["projectName"]);
+    // formData.append("description", formValues["description"]);
+    // formData.append("startDate", formValues["startDate"]);
+    // formData.append("endDate", formValues["endDate"]);
+    // formData.append("finished", formValues["finished"]);
+    // console.log("formData_2 :", formData);
+
     const savedProjectResponse = await fetch(
       "http://localhost:5001/control/addProject",
       {
