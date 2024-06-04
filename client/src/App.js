@@ -18,10 +18,12 @@ import Breakdown from "scenes/breakdown";
 import Performance from "scenes/performance";
 import Projects from "scenes/projects";
 import Tasks from "scenes/tasks";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const isAuthenticated = useSelector((state) => state.global.token);
   return (
     <div className="app">
       <BrowserRouter>
@@ -40,7 +42,13 @@ function App() {
               <Route path="/page" element={<Dashboard />} />
             </Route>*/}
             <Route path="/" element={<SignIn />} />
-            <Route element={<MainLayout />}>
+            <Route
+              element={
+                <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+                  <MainLayout />
+                </AuthenticatedRoute>
+              }
+            >
               <Route
                 path="/dashboard"
                 element={<Navigate to="/page" replace />}
