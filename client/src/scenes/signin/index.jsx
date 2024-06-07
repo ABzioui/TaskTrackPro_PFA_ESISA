@@ -3,6 +3,7 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
 import FlexBetween from "components/FlexBetween";
 import CAPImage from "../../assets/CAP-removebg-preview.png";
+import TaskTrack from "../../assets/TaskTrackPro_V3-removebg-preview.png";
 
 const SignIn = () => {
   const theme = useTheme();
@@ -16,13 +17,14 @@ const SignIn = () => {
         textAlign="center"
       >
         <FlexBetween>
-          <Typography
-            fontWeight="bold"
-            fontSize="32px"
-            color={theme.palette.secondary.main}
-          >
-            TaskTrackPro
-          </Typography>
+          <img
+            src={TaskTrack}
+            alt="TaskTrack"
+            style={{
+              width: "195px",
+              height: "auto",
+            }}
+          />
           <img
             src={CAPImage}
             alt="CAPImage"

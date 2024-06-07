@@ -35,6 +35,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import profileImage from "assets/CAPNoWord.png";
+import TaskImage from "assets/TaskTrackPro_V3-removebg-preview.png";
 
 const navItems = [
   {
@@ -133,9 +134,14 @@ const SideBar = ({
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
-                  <Typography variant="h4" fontWeight="bold">
-                    TaskTrack Pro ©
-                  </Typography>
+                  <img
+                    src={TaskImage}
+                    alt="TaskImage"
+                    style={{
+                      width: "185px",
+                      height: "auto",
+                    }}
+                  />
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>

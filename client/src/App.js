@@ -18,6 +18,7 @@ import Breakdown from "scenes/breakdown";
 import Performance from "scenes/performance";
 import Projects from "scenes/projects";
 import Tasks from "scenes/tasks";
+import TaskAssignment from "scenes/taskassignment";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
               <Route path="/performance" element={<Performance />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/tasks" element={<Tasks />} />
+              <Route path="/taskassignment" element={<TaskAssignment />} />
             </Route>
           </Routes>
         </ThemeProvider>

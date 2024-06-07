@@ -16,7 +16,7 @@ import progressRoutes from "./routes/progress.js";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
-import { addProject } from "./controllers/control.js";
+import { addProject, addTask } from "./controllers/control.js";
 
 import { userData } from "./data/userData.js";
 import { projectData } from "./data/projectData.js";
@@ -60,6 +60,7 @@ const upload = multer({ storage });
 app.post("/auth/register", upload.single("picture"), register);
 app.use("/auth", authRoutes); // Corrigez le chemin du middleware ici
 app.post("/control/addProject", addProject);
+app.post("/control/addTask", addTask);
 
 /*ROUTES pour la SideBar et le contenu general*/
 app.use("/control", controlRoutes);
