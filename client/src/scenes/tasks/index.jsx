@@ -66,8 +66,21 @@ const Tasks = () => {
     });
   };
 
-  const handleDeleteSubmit = () => {
+  const handleDeleteSubmit = async () => {
     console.log("Delete Task ID:", deleteTaskID);
+
+    const response = await fetch(
+      `http://localhost:5001/control/deleteTask/${deleteTaskID}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (response.ok) {
+      console.log("User deleted successfully");
+    } else {
+      console.error("Failed to delete user");
+    }
     setIsDeleting(false);
   };
 

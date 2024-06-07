@@ -8,13 +8,13 @@ export const dataOverallStat = [
       {
         month: "January",
         totalHours: 6166,
-        totalTasks: 17738,
+        totalTasks: 1738,
         _id: "637000f7a5a686695b5170b1",
       },
       {
         month: "February",
         totalHours: 9412,
-        totalTasks: 50516,
+        totalTasks: 516,
         _id: "637000f7a5a686695b5170b2",
       },
       {

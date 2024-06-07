@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FlexBetween from "components/FlexBetween";
 import PageHeader from "components/PageHeader";
 import {
@@ -7,6 +7,7 @@ import {
   PointOfSale,
   PersonAdd,
   Traffic,
+  Close,
 } from "@mui/icons-material";
 import {
   Box,
@@ -14,18 +15,159 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import BreakdownChart from "components/BreakdownChart";
 import OverviewChart from "components/OverviewChart";
 import StatBox from "components/StatBox";
-import { useGetDashboardQuery } from "state/api";
+import {
+  useGetDashboardQuery,
+  useGetUsersQuery,
+  useGetTasksQuery,
+  useGetProjectsQuery,
+  useGetPerformanceQuery,
+} from "state/api";
 
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   const { data, isLoading } = useGetDashboardQuery();
   console.log("Dashboard :", data);
+
+  const [openDownloadDialog, setOpenDownloadDialog] = useState(false);
+  const [selectedReports, setSelectedReports] = useState([]);
+
+  const { data: usersData, isLoading: isUserLoading } = useGetUsersQuery();
+  const { data: tasksData, isLoading: isTaskLoading } = useGetTasksQuery();
+  const { data: projectsData, isLoading: isProjectLoading } =
+    useGetProjectsQuery();
+  const { data: workhoursData, isLoading: isPerformanceLoading } =
+    useGetPerformanceQuery();
+
+  const handleDownloadReportsClick = () => {
+    setOpenDownloadDialog(true);
+  };
+
+  const handleCloseDownloadDialog = () => {
+    setOpenDownloadDialog(false);
+    setSelectedReports([]);
+  };
+
+  const handleCheckboxChange = (event) => {
+    const report = event.target.value;
+    if (event.target.checked) {
+      setSelectedReports([...selectedReports, report]);
+    } else {
+      setSelectedReports(selectedReports.filter((r) => r !== report));
+    }
+  };
+  const UserSchema = {
+    userID: "Number",
+    firstName: "String",
+    lastName: "String",
+    email: "String",
+    password: "String",
+    picturePath: "String",
+    role: "String",
+    location: "String",
+    occupation: "String",
+    phoneNumber: "String",
+  };
+
+  const ProjectSchema = {
+    projectID: "Number",
+    projectName: "String",
+    description: "String",
+    startDate: "Date",
+    endDate: "Date",
+    finished: "Boolean",
+  };
+
+  const TaskSchema = {
+    taskID: "Number",
+    taskName: "String",
+    description: "String",
+    startDate: "Date",
+    endDate: "Date",
+    projectID: "Number",
+    userID: "Number",
+  };
+
+  const WorkHourSchema = {
+    workHoursID: "Number",
+    userID: "Number",
+    date: "Date",
+    hours: "Number",
+    tasks: "Array",
+  };
+  const generateCSVFromData = (data, schema) => {
+    const headers = Object.keys(schema);
+    const csvRows = [];
+
+    // Add headers
+    csvRows.push(headers.join(","));
+
+    // Add data rows
+    data.forEach((item) => {
+      const values = headers.map((header) => {
+        const value = item[header];
+        return value !== undefined ? value.toString() : "";
+      });
+      csvRows.push(values.join(","));
+    });
+
+    return csvRows.join("\n");
+  };
+  const downloadFile = (content, fileName) => {
+    const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadClick = () => {
+    const downloadFiles = async () => {
+      try {
+        if (selectedReports.includes("users")) {
+          const usersCSV = generateCSVFromData(usersData, UserSchema);
+          downloadFile(usersCSV, "users.csv");
+        }
+
+        if (selectedReports.includes("projects")) {
+          const projectsCSV = generateCSVFromData(projectsData, ProjectSchema);
+          downloadFile(projectsCSV, "projects.csv");
+        }
+
+        if (selectedReports.includes("tasks")) {
+          const tasksCSV = generateCSVFromData(tasksData, TaskSchema);
+          downloadFile(tasksCSV, "tasks.csv");
+        }
+
+        if (selectedReports.includes("workhours")) {
+          const workhoursCSV = generateCSVFromData(
+            workhoursData,
+            WorkHourSchema
+          );
+          downloadFile(workhoursCSV, "workhours.csv");
+        }
+      } catch (error) {
+        console.error("Error downloading files:", error);
+      }
+    };
+
+    downloadFiles();
+    handleCloseDownloadDialog();
+  };
 
   const columns = [
     { field: "userID", headerName: "User ID", width: 150 },
@@ -35,6 +177,7 @@ const Dashboard = () => {
     { field: "date", headerName: "Date", width: 150 },
     { field: "hours", headerName: "Hours", width: 100 },
   ];
+
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
@@ -48,12 +191,82 @@ const Dashboard = () => {
               fontWeight: "bold",
               padding: "10px 20px",
             }}
+            onClick={handleDownloadReportsClick}
           >
             <DownloadOutlined sx={{ mr: "10px" }} />
             Download Reports
           </Button>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+            <Dialog
+              open={openDownloadDialog}
+              onClose={handleCloseDownloadDialog}
+              PaperProps={{
+                style: {
+                  width: "400px",
+                },
+              }}
+            >
+              <DialogTitle>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography variant="h6">Download Reports</Typography>
+                  <Close
+                    onClick={handleCloseDownloadDialog}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Box>
+              </DialogTitle>
+              <DialogContent>
+                <FormGroup row>
+                  <FormControlLabel
+                    control={
+                      <Checkbox value="users" onChange={handleCheckboxChange} />
+                    }
+                    label={<Typography variant="body1">Users</Typography>}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value="projects"
+                        onChange={handleCheckboxChange}
+                      />
+                    }
+                    label={<Typography variant="body1">Projects</Typography>}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox value="tasks" onChange={handleCheckboxChange} />
+                    }
+                    label={<Typography variant="body1">Tasks</Typography>}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value="workhours"
+                        onChange={handleCheckboxChange}
+                      />
+                    }
+                    label={<Typography variant="body1">Work Hours</Typography>}
+                  />
+                </FormGroup>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  onClick={handleDownloadClick}
+                  color="primary"
+                  variant="contained"
+                >
+                  Download
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Box>
         </Box>
       </FlexBetween>
+
       <Box
         mt="20px"
         display="grid"

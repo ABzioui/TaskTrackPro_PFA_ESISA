@@ -29,6 +29,10 @@ export const api = createApi({
       query: (id) => `auth/deleteUser/${id}`,
       providesTags: ["User"],
     }),
+    updateTaskById: build.query({
+      query: (id, userID) => `/task/${id}/assign/${userID}`,
+      providesTags: ["Task"],
+    }),
     getUsers: build.query({
       query: () => "management/admin",
       providesTags: ["Customers"],

@@ -43,24 +43,20 @@ const Projects = () => {
   const handleSubmit = async () => {
     console.log("Form submitted:", formValues);
     const formData = new FormData();
-    // for (let value in formValues) {
-    //   formData.append(value, formValues[value]);
-    // }
-
-    // formData.append("projectID", formValues["projectID"]);
-    // console.log("formData_1 :", formData);
-    // formData.append("projectName", formValues["projectName"]);
-    // formData.append("description", formValues["description"]);
-    // formData.append("startDate", formValues["startDate"]);
-    // formData.append("endDate", formValues["endDate"]);
-    // formData.append("finished", formValues["finished"]);
-    // console.log("formData_2 :", formData);
+    Object.entries(formValues).forEach(([key, value]) => {
+      if (typeof value === "boolean") {
+        formData.set(key, value ? "true" : "false");
+      } else {
+        formData.set(key, value);
+      }
+    });
+    console.log("formData :", formData);
 
     const savedProjectResponse = await fetch(
       "http://localhost:5001/control/addProject",
       {
         method: "POST",
-        body: formValues,
+        body: formData,
       }
     );
     const savedProject = await savedProjectResponse.json();
@@ -76,8 +72,20 @@ const Projects = () => {
     });
   };
 
-  const handleDeleteSubmit = () => {
+  const handleDeleteSubmit = async () => {
     console.log("Delete Project ID:", deleteProjectID);
+    const response = await fetch(
+      `http://localhost:5001/control/deleteProject/${deleteProjectID}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (response.ok) {
+      console.log("User deleted successfully");
+    } else {
+      console.error("Failed to delete user");
+    }
     setIsDeleting(false);
   };
 
