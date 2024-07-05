@@ -10,14 +10,15 @@ const Header = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
+      data-testid="header-container"
     >
-      <Box textAlign="center">
+      <Box textAlign="center" data-testid="inner-box">
         <Typography
           variant="h1"
           fontWeight="bold"
           color={theme.palette.secondary.main}
-          marginTop="20px
-          "
+          marginTop="20px"
+          data-testid="header-title"
         >
           TaskTrack Pro
         </Typography>

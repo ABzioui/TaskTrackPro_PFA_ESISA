@@ -84,6 +84,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             p="0.1rem 1.5rem"
           >
             <InputBase
+              data-testid="Search"
               placeholder="Search..."
               value={searchInput}
               onChange={handleSearchChange}
