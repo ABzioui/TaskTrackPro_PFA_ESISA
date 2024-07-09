@@ -15,15 +15,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/your-project.git'
+                git branch: 'main', url: 'https://github.com/ABzioui/TaskTrackPro_PFA_ESISA.git'
             }
         }
         stage('Build and Deploy') {
             steps {
                 script {
-                    // Remplacer les placeholders dans docker-compose.yml par des valeurs réelles
-                    sh 'sed -i "s/${BUILD_ID}/${env.BUILD_ID}/g" docker-compose.yml'
-                    
                     // Construire et déployer les images
                     sh 'docker-compose -f docker-compose.yml build'
                     sh 'docker-compose -f docker-compose.yml up -d'
